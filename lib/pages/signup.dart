@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import '../widgets/form.dart';
+import '../consts/sizes.dart';
+import '../widgets/images.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -30,34 +33,28 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(AppSizes.paddingAroundForm),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
+            AppImages.logo(),
+            const SizedBox(height: AppSizes.paddingBetweenFormFields * 2),
+            AuthTextField(
+              label: 'Email',
               controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
-                border: OutlineInputBorder(),
-              ),
             ),
-            const SizedBox(height: 16),
-            TextField(
+            const SizedBox(height: AppSizes.paddingBetweenFormFields),
+            AuthTextField(
+              label: 'Password',
               controller: _passwordController,
               obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-              ),
             ),
-            const SizedBox(height: 24),
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton(
-                onPressed: _signUp,
-                child: const Text('Create Account'),
-              ),
+            const SizedBox(height: AppSizes.paddingBetweenFormFields * 1.5),
+            AuthButton(
+              text: 'Create Account',
+              onPressed: _signUp,
             ),
+            const SizedBox(height: AppSizes.paddingBetweenFormFields),
             TextButton(
               onPressed: () => Navigator.pushReplacementNamed(context, '/login'),
               child: const Text('Already have an account? Log in'),
